@@ -8,7 +8,9 @@
 <meta property="og:title" content="Akademi Kaşifi">
 <meta property="og:description" content="Optik formu bırakın; sınıfınızın hangi öğrenme çıktısında takıldığını deneme günü görün.">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23fbf8f3'/%3E%3Ccircle cx='10' cy='10' r='5' fill='%23c43d3a'/%3E%3Ccircle cx='22' cy='10' r='4' fill='none' stroke='%23c43d3a' stroke-width='2'/%3E%3Ccircle cx='10' cy='22' r='4' fill='none' stroke='%23c43d3a' stroke-width='2'/%3E%3Ccircle cx='22' cy='22' r='5' fill='%23c43d3a'/%3E%3C/svg%3E">
+<meta property="og:image" content="https://www.akademikasifi.com/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
@@ -41,9 +43,7 @@ h1, h2, h3 { font-family: var(--display); line-height: 1.1; text-wrap: balance; 
 header { border-bottom: 1px solid var(--line); background: var(--paper); position: sticky; top: 0; z-index: 10; }
 .bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 68px; }
 .logo { display: flex; align-items: center; gap: 10px; font: 800 21px/1 var(--display); color: var(--ink); text-decoration: none; letter-spacing: -0.01em; }
-.logo-mark { display: grid; grid-template-columns: repeat(2, 9px); gap: 3px; }
-.logo-mark i { width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--optik); }
-.logo-mark i.f { background: var(--optik); }
+.logo-img { width: 40px; height: 40px; border-radius: 50%; display: block; }
 nav { display: flex; gap: 22px; flex-wrap: wrap; }
 nav a { color: var(--ink); text-decoration: none; font-weight: 500; font-size: 15px; }
 nav a:hover { color: var(--optik); }
@@ -149,6 +149,7 @@ section + section { border-top: 1px solid var(--line); }
 .contact dt { font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
 .contact dd { margin: 2px 0 0; font-size: 17px; overflow-wrap: anywhere; }
 
+.mascot { width: 200px; height: auto; max-width: 100%; border-radius: 16px; margin-bottom: 16px; display: block; }
 footer { background: var(--ink); color: #c9cdd6; padding: 28px 0; font-size: 14.5px; }
 footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 footer a { color: #fff; }
@@ -158,7 +159,7 @@ footer a { color: #fff; }
 <header>
   <div class="wrap bar">
     <a class="logo" href="#top" aria-label="Akademi Kaşifi ana sayfa">
-      <span class="logo-mark" aria-hidden="true"><i class="f"></i><i></i><i></i><i class="f"></i></span>
+      <img class="logo-img" src="/logo-96.png" width="40" height="40" alt="">
       Akademi Kaşifi
     </a>
     <nav aria-label="Ana menü">
@@ -280,6 +281,7 @@ footer a { color: #fff; }
   <section id="iletisim">
     <div class="wrap contact">
       <div>
+        <img class="mascot" src="/maskot.webp" width="640" height="566" alt="Büyüteçle bakan, sarı kapüşonlu Akademi Kaşifi maskotu">
         <h2 class="sec-title">Pilot okul olmak ya da tanıtım için yazın.</h2>
         <p class="sec-lead">Okul yöneticisi, rehber öğretmen veya branş öğretmeniyseniz 20 dakikalık bir tanıtım ayarlayalım.</p>
         <p style="margin-top:24px"><a class="btn btn-primary" href="mailto:alperenkirkil@gmail.com?subject=Akademi%20Ka%C5%9Fifi%20tan%C4%B1t%C4%B1m">E-posta gönderin</a></p>
