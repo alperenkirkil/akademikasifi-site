@@ -8,6 +8,7 @@
 <meta property="og:title" content="Akademi Kaşifi">
 <meta property="og:description" content="Optik formu bırakın; sınıfınızın hangi öğrenme çıktısında takıldığını deneme günü görün.">
 <meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23fbf8f3'/%3E%3Ccircle cx='10' cy='10' r='5' fill='%23c43d3a'/%3E%3Ccircle cx='22' cy='10' r='4' fill='none' stroke='%23c43d3a' stroke-width='2'/%3E%3Ccircle cx='10' cy='22' r='4' fill='none' stroke='%23c43d3a' stroke-width='2'/%3E%3Ccircle cx='22' cy='22' r='5' fill='%23c43d3a'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
@@ -46,11 +47,23 @@ header { border-bottom: 1px solid var(--line); background: var(--paper); positio
 nav { display: flex; gap: 22px; flex-wrap: wrap; }
 nav a { color: var(--ink); text-decoration: none; font-weight: 500; font-size: 15px; }
 nav a:hover { color: var(--optik); }
-@media (max-width: 760px) { nav { display: none; } }
+.nav-cta { display: none; padding: 8px 14px; border-radius: 8px; background: var(--optik); color: #fff; font-weight: 600; font-size: 14px; text-decoration: none; }
+@media (max-width: 760px) { nav { display: none; } .nav-cta { display: inline-block; } }
 
 /* Açılış */
-.hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center; padding: 64px 0 56px; }
-@media (max-width: 900px) { .hero { grid-template-columns: 1fr; padding-top: 40px; } }
+.hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center; padding-top: 64px; padding-bottom: 56px; }
+.hero > * { min-width: 0; }
+@media (max-width: 900px) { .hero { grid-template-columns: 1fr; padding-top: 40px; gap: 36px; } }
+.map-scroll { overflow-x: auto; }
+.map th.c { width: 17%; }
+@media (max-width: 480px) {
+  .sheet { padding: 16px 14px; }
+  .sheet-head h2 { font-size: 15px; }
+  .map { border-spacing: 3px; }
+  .map td { height: 34px; font-size: 12.5px; }
+  .map td.k { font-size: 12px; }
+  .na { font-size: 9.5px !important; }
+}
 .eyebrow { font: 600 13px/1 var(--body); letter-spacing: .08em; text-transform: uppercase; color: var(--optik); margin-bottom: 18px; }
 .hero h1 { font-size: clamp(36px, 5.2vw, 62px); font-weight: 800; letter-spacing: -0.025em; }
 .hero h1 s { text-decoration-color: var(--optik); text-decoration-thickness: 4px; color: var(--muted); }
@@ -63,7 +76,7 @@ nav a:hover { color: var(--optik); }
 .btn-ghost:hover { background: var(--ink); color: var(--paper); }
 
 /* Optik form → harita kartı */
-.sheet { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 22px; box-shadow: 0 18px 40px -24px rgba(29,36,51,.35); }
+.sheet { margin: 0; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 22px; box-shadow: 0 18px 40px -24px rgba(29,36,51,.35); }
 .sheet-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 14px; }
 .sheet-head h2 { font-size: 17px; font-weight: 700; }
 .tag { font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 999px; background: var(--optik-soft); color: #8e2a28; white-space: nowrap; }
@@ -102,6 +115,7 @@ section + section { border-top: 1px solid var(--line); }
 
 /* Roller */
 .roles { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; margin-top: 36px; }
+@media (min-width: 1000px) { .roles { grid-template-columns: repeat(5, 1fr); gap: 14px; } .role { padding: 20px 18px; } }
 .role { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
 .role h3 { font-size: 18px; margin-bottom: 8px; }
 .role p { margin: 0; color: var(--muted); font-size: 15.5px; }
@@ -154,6 +168,7 @@ footer a { color: #fff; }
       <a href="#sayi-kasifi">Sayı Kaşifi</a>
       <a href="#iletisim">İletişim</a>
     </nav>
+    <a class="nav-cta" href="#iletisim">İletişim</a>
   </div>
 </header>
 
@@ -174,14 +189,16 @@ footer a { color: #fff; }
         <h2>8. sınıf Matematik · deneme sonrası</h2>
         <span class="tag">Örnek veri</span>
       </div>
+      <div class="map-scroll">
       <table class="map" id="map">
         <thead><tr><th scope="col">Öğrenme çıktısı</th><th class="c" scope="col">8-A</th><th class="c" scope="col">8-B</th><th class="c" scope="col">8-C</th><th class="c" scope="col">8-D</th></tr></thead>
         <tbody></tbody>
       </table>
+      </div>
       <div class="legend" aria-hidden="true">
-        <span><b class="lvl-1"></b>%0–39</span>
-        <span><b class="lvl-3"></b>%40–69</span>
-        <span><b class="lvl-5"></b>%70–100</span>
+        <span><b class="lvl-1"></b>Başlangıç %0–39</span>
+        <span><b class="lvl-3"></b>Gelişiyor %40–69</span>
+        <span><b class="lvl-5"></b>Yeterli %70–100</span>
         <span><b class="na"></b>Henüz işlenmedi</span>
       </div>
     </figure>
@@ -293,7 +310,8 @@ const rows = [
   ["MAT.8.3.5", "Pisagor bağıntısı", [35, 27, 44, 38]],
   ["MAT.8.4.3", "Silindirin hacmi", [null, null, 62, null]],
 ];
-const band = v => v < 25 ? 1 : v < 40 ? 2 : v < 55 ? 3 : v < 70 ? 4 : 5;
+// Platformdaki ustalık eşikleriyle aynı: <%40 Başlangıç, %40–69 Gelişiyor, ≥%70 Yeterli
+const band = v => v < 40 ? 1 : v < 70 ? 3 : 5;
 const tbody = document.querySelector("#map tbody");
 rows.forEach(([code, name, vals], r) => {
   const tr = document.createElement("tr");
