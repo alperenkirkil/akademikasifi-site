@@ -47,6 +47,7 @@ header { border-bottom: 1px solid var(--line); background: var(--paper); positio
 nav { display: flex; gap: 22px; flex-wrap: wrap; }
 nav a { color: var(--ink); text-decoration: none; font-weight: 500; font-size: 15px; }
 nav a:hover { color: var(--optik); }
+nav a.nav-apply { color: var(--optik); font-weight: 600; }
 .nav-cta { display: none; padding: 8px 14px; border-radius: 8px; background: var(--optik); color: #fff; font-weight: 600; font-size: 14px; text-decoration: none; }
 @media (max-width: 760px) { nav { display: none; } .nav-cta { display: inline-block; } }
 
@@ -65,9 +66,10 @@ nav a:hover { color: var(--optik); }
   .na { font-size: 9.5px !important; }
 }
 .eyebrow { font: 600 13px/1 var(--body); letter-spacing: .08em; text-transform: uppercase; color: var(--optik); margin-bottom: 18px; }
-.hero h1 { font-size: clamp(36px, 5.2vw, 62px); font-weight: 800; letter-spacing: -0.025em; }
+.hero h1 { font-size: clamp(34px, 4.4vw, 54px); font-weight: 800; letter-spacing: -0.025em; }
 .hero h1 s { text-decoration-color: var(--optik); text-decoration-thickness: 4px; color: var(--muted); }
 .lead { font-size: 19px; color: var(--muted); max-width: 34em; margin: 22px 0 30px; }
+.origin { margin: -12px 0 28px; padding: 12px 16px; border-left: 4px solid var(--optik); background: #fff; border-radius: 0 10px 10px 0; font-size: 16px; max-width: 34em; }
 .actions { display: flex; gap: 14px; flex-wrap: wrap; }
 .btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 10px; font-weight: 600; text-decoration: none; font-size: 16px; }
 .btn-primary { background: var(--optik); color: #fff; }
@@ -128,15 +130,6 @@ section + section { border-top: 1px solid var(--line); }
 .rule h3 { font-size: 17px; margin-bottom: 4px; }
 .rule p { margin: 0; color: var(--muted); font-size: 15.5px; }
 
-/* Takvim */
-.timeline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
-@media (max-width: 760px) { .timeline { grid-template-columns: 1fr; } }
-.step { border-left: 4px solid var(--line); padding: 6px 0 6px 16px; }
-.step.now { border-color: var(--optik); }
-.step small { display: block; font-weight: 600; color: var(--optik); letter-spacing: .04em; }
-.step h3 { font-size: 18px; margin: 4px 0; }
-.step p { margin: 0; color: var(--muted); font-size: 15.5px; }
-
 /* Sayı Kaşifi */
 .app { display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: center; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 28px; }
 @media (max-width: 600px) { .app { grid-template-columns: 1fr; } }
@@ -150,6 +143,20 @@ section + section { border-top: 1px solid var(--line); }
 .contact dd { margin: 2px 0 0; font-size: 17px; overflow-wrap: anywhere; }
 
 .mascot { width: 200px; height: auto; max-width: 100%; border-radius: 16px; margin-bottom: 16px; display: block; }
+/* Başvuru formu */
+.apply { display: grid; gap: 14px; margin-top: 24px; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 560px) { .grid2 { grid-template-columns: 1fr; } }
+.apply label { display: grid; gap: 6px; font-size: 14px; font-weight: 600; color: var(--ink); }
+.apply input, .apply select, .apply textarea { font: 400 16px/1.4 var(--body); padding: 10px 12px; border: 1.5px solid var(--line); border-radius: 10px; background: #fff; color: var(--ink); width: 100%; }
+.apply input:focus-visible, .apply select:focus-visible, .apply textarea:focus-visible { outline: 3px solid var(--optik); outline-offset: 1px; border-color: transparent; }
+.apply fieldset { border: 0; padding: 0; margin: 0; display: flex; gap: 18px; flex-wrap: wrap; }
+.apply legend { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+.apply label.check { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; font-size: 15px; }
+.apply label.check input { width: 18px; height: 18px; }
+.kvkk, .form-note { font-size: 13.5px; color: var(--muted); margin: 0; }
+.form-error { color: #a92f2c; font-size: 14px; font-weight: 600; margin: 0; min-height: 0; }
+.apply .btn { justify-self: start; border: 0; cursor: pointer; }
 footer { background: var(--ink); color: #c9cdd6; padding: 28px 0; font-size: 14.5px; }
 footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 footer a { color: #fff; }
@@ -165,11 +172,10 @@ footer a { color: #fff; }
     <nav aria-label="Ana menü">
       <a href="#okullar">Okullar için</a>
       <a href="#ilkeler">İlkelerimiz</a>
-      <a href="#takvim">Takvim</a>
       <a href="#sayi-kasifi">Sayı Kaşifi</a>
-      <a href="#iletisim">İletişim</a>
+      <a href="#basvuru" class="nav-apply">Pilot başvurusu</a>
     </nav>
-    <a class="nav-cta" href="#iletisim">İletişim</a>
+    <a class="nav-cta" href="#basvuru">Başvuru</a>
   </div>
 </header>
 
@@ -179,8 +185,9 @@ footer a { color: #fff; }
       <p class="eyebrow">LGS ve YKS'ye hazırlanan okullar için</p>
       <h1><s>Optik form</s> yerine, sınıfınızın hangi kazanımda takıldığını deneme günü görün.</h1>
       <p class="lead">Akademi Kaşifi; tablette deneme, ödev ve günlük çalışmayı Maarif Modeli öğrenme çıktılarına bağlar. Rehber öğretmen sınıfın eksik haritasını, branş öğretmeni kendi dersini, veli haftalık özeti görür.</p>
+      <p class="origin">ABD'de okulların yaygın kullandığı öğrenme çıktısı düzeyinde ölçme ve veri odaklı takip yaklaşımını, Maarif Modeli'ne göre Türk okullarına getiriyoruz.</p>
       <div class="actions">
-        <a class="btn btn-primary" href="#iletisim">Pilot okul olmak için yazın</a>
+        <a class="btn btn-primary" href="#basvuru">Pilot okul başvurusu</a>
         <a class="btn btn-ghost" href="#okullar">Nasıl çalışır?</a>
       </div>
     </div>
@@ -254,17 +261,6 @@ footer a { color: #fff; }
     </div>
   </section>
 
-  <section id="takvim">
-    <div class="wrap">
-      <h2 class="sec-title">Nerede olduğumuz</h2>
-      <p class="sec-lead">Platform geliştirme aşamasında. Henüz bir okulda kullanılmıyor.</p>
-      <div class="timeline">
-        <div class="step now"><small>2026–2027</small><h3>Geliştirme</h3><p>Soru bankası, öğrenme çıktısı kataloğu, okul ve sınıf yapısı, tablette deneme.</p></div>
-        <div class="step"><small>2027–2028</small><h3>Pilot okul</h3><p>8. ve 12. sınıflarla tek bir pilot okulda kullanım. Pilot için görüşmeye açığız.</p></div>
-        <div class="step"><small>Sonrası</small><h3>Yaygınlaşma</h3><p>Pilot okulun geri bildirimiyle yeni okullar ve okul dışı çalışma.</p></div>
-      </div>
-    </div>
-  </section>
 
   <section id="sayi-kasifi">
     <div class="wrap">
@@ -278,15 +274,40 @@ footer a { color: #fff; }
     </div>
   </section>
 
-  <section id="iletisim">
+  <section id="basvuru">
     <div class="wrap contact">
       <div>
         <img class="mascot" src="/maskot.webp" width="640" height="566" alt="Büyüteçle bakan, sarı kapüşonlu Akademi Kaşifi maskotu">
-        <h2 class="sec-title">Pilot okul olmak ya da tanıtım için yazın.</h2>
-        <p class="sec-lead">Okul yöneticisi, rehber öğretmen veya branş öğretmeniyseniz 20 dakikalık bir tanıtım ayarlayalım.</p>
-        <p style="margin-top:24px"><a class="btn btn-primary" href="mailto:alperenkirkil@gmail.com?subject=Akademi%20Ka%C5%9Fifi%20tan%C4%B1t%C4%B1m">E-posta gönderin</a></p>
+        <h2 class="sec-title">Pilot okullar arasında olmak için başvurun.</h2>
+        <p class="sec-lead">Platform 2027–2028 öğretim yılında 8. ve 12. sınıflarla pilot okullarda kullanılmaya başlayacak. Formu doldurun; okulunuz için 20 dakikalık bir tanıtım ayarlamak üzere sizi arayalım.</p>
+        <form id="apply" class="apply" novalidate>
+          <div class="grid2">
+            <label for="f-school">Okul adı<input id="f-school" name="school" required autocomplete="organization"></label>
+            <label for="f-city">İl / ilçe<input id="f-city" name="city" required></label>
+            <label for="f-name">Adınız soyadınız<input id="f-name" name="name" required autocomplete="name"></label>
+            <label for="f-role">Göreviniz
+              <select id="f-role" name="role" required>
+                <option value="">Seçin</option>
+                <option>Okul müdürü</option><option>Müdür yardımcısı</option>
+                <option>Rehber öğretmen</option><option>Branş öğretmeni</option><option>Diğer</option>
+              </select>
+            </label>
+            <label for="f-phone">Telefon<input id="f-phone" name="phone" type="tel" required autocomplete="tel"></label>
+            <label for="f-email">E-posta<input id="f-email" name="email" type="email" required autocomplete="email"></label>
+          </div>
+          <fieldset>
+            <legend>Hangi kademeler?</legend>
+            <label class="check" for="f-g8"><input id="f-g8" type="checkbox" name="grade" value="8. sınıf (LGS)"> 8. sınıf (LGS)</label>
+            <label class="check" for="f-g12"><input id="f-g12" type="checkbox" name="grade" value="12. sınıf (YKS)"> 12. sınıf (YKS)</label>
+          </fieldset>
+          <label for="f-note">Notunuz (isteğe bağlı)<textarea id="f-note" name="note" rows="3"></textarea></label>
+          <p class="kvkk">Bu bilgiler yalnızca başvurunuzla ilgili sizinle iletişim kurmak için kullanılır ve üçüncü kişilerle paylaşılmaz.</p>
+          <p class="form-error" id="apply-error" role="alert"></p>
+          <button class="btn btn-primary" type="submit">Başvuruyu gönder</button>
+          <p class="form-note" id="apply-note" hidden>E-posta uygulamanız başvurunuzla açıldı; göndermeyi unutmayın. Açılmadıysa bilgilerinizi <strong>alperenkirkil@gmail.com</strong> adresine yazın ya da <strong>0538 702 52 88</strong> numarasını arayın.</p>
+        </form>
       </div>
-      <dl>
+      <dl id="iletisim">
         <div><dt>Adres</dt><dd>Fırat Üniversitesi Teknokent Kampüsü, YGT-KAM Yazılım Ar-Ge, Elazığ</dd></div>
         <div><dt>Telefon</dt><dd><a href="tel:+905387025288">0538 702 52 88</a></dd></div>
         <div><dt>E-posta</dt><dd><a href="mailto:alperenkirkil@gmail.com">alperenkirkil@gmail.com</a></dd></div>
@@ -328,6 +349,27 @@ rows.forEach(([code, name, vals], r) => {
     tr.appendChild(td);
   });
   tbody.appendChild(tr);
+});
+// Pilot başvurusu: statik sitede sunucu yok; form, alanları doldurulmuş bir e-posta taslağı açar.
+const form = document.getElementById("apply");
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const err = document.getElementById("apply-error");
+  const missing = [...form.querySelectorAll("[required]")].find((el) => !el.value.trim());
+  const grades = [...form.querySelectorAll('input[name="grade"]:checked')].map((el) => el.value);
+  if (missing) { err.textContent = "Lütfen işaretli alanların hepsini doldurun."; missing.focus(); return; }
+  if (!form.email.checkValidity()) { err.textContent = "E-posta adresini kontrol edin."; form.email.focus(); return; }
+  if (!grades.length) { err.textContent = "En az bir kademe seçin."; return; }
+  err.textContent = "";
+  const f = (n) => form[n].value.trim();
+  const body = [
+    "Okul: " + f("school"), "İl / ilçe: " + f("city"), "Ad soyad: " + f("name"),
+    "Görev: " + f("role"), "Telefon: " + f("phone"), "E-posta: " + f("email"),
+    "Kademe: " + grades.join(", "), "", f("note")
+  ].join("\n");
+  const subject = "Pilot okul başvurusu – " + f("school");
+  window.location.href = "mailto:alperenkirkil@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+  document.getElementById("apply-note").hidden = false;
 });
 </script>
 </body>
