@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Akademi Kaşifi</title>
+<meta name="description" content="Akademi Kaşifi: LGS ve YKS'ye hazırlanan okullar için deneme, ödev ve sınıf × kazanım haritası. Maarif Modeli öğrenme çıktılarıyla. Turan Dynamics, Fırat Üniversitesi Teknokent.">
+<meta property="og:title" content="Akademi Kaşifi">
+<meta property="og:description" content="Optik formu bırakın; sınıfınızın hangi öğrenme çıktısında takıldığını deneme günü görün.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Düzen: optik form kâğıdı. Okulların bugün kullandığı kırmızı mürekkepli cevap kâğıdı
+   ile ürünün yerine koyduğu sınıf × kazanım haritası aynı sayfada yan yana. */
+:root {
+  --paper: #fbf8f3;        /* kâğıt */
+  --ink: #1d2433;          /* koyu mürekkep */
+  --muted: #5d6474;
+  --optik: #c43d3a;        /* optik form kırmızısı */
+  --optik-soft: #f4dcd8;
+  --teal: #1b6e7a;         /* uygulamanın rengi */
+  --line: #e6ded3;
+  --card: #ffffff;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "Figtree", "Segoe UI", system-ui, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 400 17px/1.6 var(--body); }
+a { color: var(--teal); }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--optik); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.1; text-wrap: balance; margin: 0; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+/* Üst şerit */
+header { border-bottom: 1px solid var(--line); background: var(--paper); position: sticky; top: 0; z-index: 10; }
+.bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 68px; }
+.logo { display: flex; align-items: center; gap: 10px; font: 800 21px/1 var(--display); color: var(--ink); text-decoration: none; letter-spacing: -0.01em; }
+.logo-mark { display: grid; grid-template-columns: repeat(2, 9px); gap: 3px; }
+.logo-mark i { width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--optik); }
+.logo-mark i.f { background: var(--optik); }
+nav { display: flex; gap: 22px; flex-wrap: wrap; }
+nav a { color: var(--ink); text-decoration: none; font-weight: 500; font-size: 15px; }
+nav a:hover { color: var(--optik); }
+@media (max-width: 760px) { nav { display: none; } }
+
+/* Açılış */
+.hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center; padding: 64px 0 56px; }
+@media (max-width: 900px) { .hero { grid-template-columns: 1fr; padding-top: 40px; } }
+.eyebrow { font: 600 13px/1 var(--body); letter-spacing: .08em; text-transform: uppercase; color: var(--optik); margin-bottom: 18px; }
+.hero h1 { font-size: clamp(36px, 5.2vw, 62px); font-weight: 800; letter-spacing: -0.025em; }
+.hero h1 s { text-decoration-color: var(--optik); text-decoration-thickness: 4px; color: var(--muted); }
+.lead { font-size: 19px; color: var(--muted); max-width: 34em; margin: 22px 0 30px; }
+.actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 10px; font-weight: 600; text-decoration: none; font-size: 16px; }
+.btn-primary { background: var(--optik); color: #fff; }
+.btn-primary:hover { background: #a92f2c; }
+.btn-ghost { border: 1.5px solid var(--ink); color: var(--ink); }
+.btn-ghost:hover { background: var(--ink); color: var(--paper); }
+
+/* Optik form → harita kartı */
+.sheet { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 22px; box-shadow: 0 18px 40px -24px rgba(29,36,51,.35); }
+.sheet-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 14px; }
+.sheet-head h2 { font-size: 17px; font-weight: 700; }
+.tag { font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 999px; background: var(--optik-soft); color: #8e2a28; white-space: nowrap; }
+.map { width: 100%; border-collapse: separate; border-spacing: 4px; font-variant-numeric: tabular-nums; }
+.map th { font: 600 12px/1.2 var(--body); color: var(--muted); text-align: left; }
+.map th.c { text-align: center; }
+.map td { height: 38px; border-radius: 6px; text-align: center; font-weight: 600; font-size: 14px; }
+.map td.k { background: none; text-align: left; font-weight: 500; font-size: 13px; line-height: 1.25; }
+.map td.k code { display: block; font: 600 11px/1.3 ui-monospace, Consolas, monospace; color: var(--teal); }
+.lvl-1 { background: #c43d3a; color: #fff; }
+.lvl-2 { background: #e99a8a; color: #4a1514; }
+.lvl-3 { background: #f2d7a6; color: #4a3612; }
+.lvl-4 { background: #a9d6cf; color: #10393f; }
+.lvl-5 { background: #1b6e7a; color: #fff; }
+.na { background: repeating-linear-gradient(135deg, #eee 0 6px, #f6f6f6 6px 12px); color: #777; font-weight: 500 !important; font-size: 11px !important; }
+.legend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; font-size: 12px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend b { width: 14px; height: 14px; border-radius: 4px; display: inline-block; }
+.cell-in { animation: fill .5s ease both; }
+@keyframes fill { from { transform: scale(.4); opacity: .2; } to { transform: scale(1); opacity: 1; } }
+
+/* Bölümler */
+section { padding: 72px 0; }
+section + section { border-top: 1px solid var(--line); }
+.sec-title { font-size: clamp(28px, 3.4vw, 40px); font-weight: 800; letter-spacing: -0.02em; max-width: 22em; }
+.sec-lead { color: var(--muted); max-width: 40em; margin-top: 12px; }
+
+/* Bugün / platformla */
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 36px; }
+@media (max-width: 760px) { .compare { grid-template-columns: 1fr; } }
+.col { border-radius: 14px; padding: 26px; }
+.col h3 { font-size: 20px; margin-bottom: 14px; }
+.col.old { background: #f3ece4; }
+.col.new { background: var(--card); border: 1.5px solid var(--teal); }
+.col ol { margin: 0; padding-left: 20px; display: grid; gap: 8px; }
+
+/* Roller */
+.roles { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; margin-top: 36px; }
+.role { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+.role h3 { font-size: 18px; margin-bottom: 8px; }
+.role p { margin: 0; color: var(--muted); font-size: 15.5px; }
+.bubble { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--optik); color: var(--optik); font: 700 13px/1 var(--display); margin-bottom: 12px; }
+
+/* İlkeler */
+.rules { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 40px; margin-top: 28px; }
+@media (max-width: 760px) { .rules { grid-template-columns: 1fr; } }
+.rule { padding: 18px 0; border-bottom: 1px solid var(--line); }
+.rule h3 { font-size: 17px; margin-bottom: 4px; }
+.rule p { margin: 0; color: var(--muted); font-size: 15.5px; }
+
+/* Takvim */
+.timeline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+@media (max-width: 760px) { .timeline { grid-template-columns: 1fr; } }
+.step { border-left: 4px solid var(--line); padding: 6px 0 6px 16px; }
+.step.now { border-color: var(--optik); }
+.step small { display: block; font-weight: 600; color: var(--optik); letter-spacing: .04em; }
+.step h3 { font-size: 18px; margin: 4px 0; }
+.step p { margin: 0; color: var(--muted); font-size: 15.5px; }
+
+/* Sayı Kaşifi */
+.app { display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: center; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 28px; }
+@media (max-width: 600px) { .app { grid-template-columns: 1fr; } }
+.app-icon { width: 76px; height: 76px; border-radius: 18px; background: var(--teal); color: #fff; display: grid; place-items: center; font: 800 30px/1 var(--display); }
+
+/* İletişim */
+.contact { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: start; }
+@media (max-width: 760px) { .contact { grid-template-columns: 1fr; } }
+.contact dl { margin: 0; display: grid; gap: 14px; }
+.contact dt { font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.contact dd { margin: 2px 0 0; font-size: 17px; overflow-wrap: anywhere; }
+
+footer { background: var(--ink); color: #c9cdd6; padding: 28px 0; font-size: 14.5px; }
+footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+footer a { color: #fff; }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#top" aria-label="Akademi Kaşifi ana sayfa">
+      <span class="logo-mark" aria-hidden="true"><i class="f"></i><i></i><i></i><i class="f"></i></span>
+      Akademi Kaşifi
+    </a>
+    <nav aria-label="Ana menü">
+      <a href="#okullar">Okullar için</a>
+      <a href="#ilkeler">İlkelerimiz</a>
+      <a href="#takvim">Takvim</a>
+      <a href="#sayi-kasifi">Sayı Kaşifi</a>
+      <a href="#iletisim">İletişim</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <div>
+      <p class="eyebrow">LGS ve YKS'ye hazırlanan okullar için</p>
+      <h1><s>Optik form</s> yerine, sınıfınızın hangi kazanımda takıldığını deneme günü görün.</h1>
+      <p class="lead">Akademi Kaşifi; tablette deneme, ödev ve günlük çalışmayı Maarif Modeli öğrenme çıktılarına bağlar. Rehber öğretmen sınıfın eksik haritasını, branş öğretmeni kendi dersini, veli haftalık özeti görür.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#iletisim">Pilot okul olmak için yazın</a>
+        <a class="btn btn-ghost" href="#okullar">Nasıl çalışır?</a>
+      </div>
+    </div>
+
+    <figure class="sheet" aria-label="Örnek sınıf ve kazanım haritası">
+      <div class="sheet-head">
+        <h2>8. sınıf Matematik · deneme sonrası</h2>
+        <span class="tag">Örnek veri</span>
+      </div>
+      <table class="map" id="map">
+        <thead><tr><th scope="col">Öğrenme çıktısı</th><th class="c" scope="col">8-A</th><th class="c" scope="col">8-B</th><th class="c" scope="col">8-C</th><th class="c" scope="col">8-D</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <div class="legend" aria-hidden="true">
+        <span><b class="lvl-1"></b>%0–39</span>
+        <span><b class="lvl-3"></b>%40–69</span>
+        <span><b class="lvl-5"></b>%70–100</span>
+        <span><b class="na"></b>Henüz işlenmedi</span>
+      </div>
+    </figure>
+  </div>
+
+  <section id="okullar">
+    <div class="wrap">
+      <h2 class="sec-title">Haftalık deneme, kâğıt ve tarayıcı olmadan.</h2>
+      <p class="sec-lead">8. ve 12. sınıflarda okulların bugünkü iş yükü haftalık denemedir. Akademi Kaşifi bu döngünün yerini alır ve sonucu sınav günü, öğrenme çıktısı düzeyinde verir.</p>
+      <div class="compare">
+        <div class="col old">
+          <h3>Bugün</h3>
+          <ol>
+            <li>Kitapçık ve optik form basılır, dağıtılır.</li>
+            <li>Formlar toplanır, okuyucudan geçirilir.</li>
+            <li>Sonuçlar Excel'e aktarılır; çoğu zaman yalnızca net görülür.</li>
+            <li>Hangi konuda eksik olduğu ders ders, elle çıkarılır.</li>
+          </ol>
+        </div>
+        <div class="col new">
+          <h3>Akademi Kaşifi ile</h3>
+          <ol>
+            <li>Deneme tablette açılır; bağlantı koparsa cevaplar cihazda saklanır.</li>
+            <li>Süreyi sunucu tutar; aynı öğrenci ikinci cihazdan giremez.</li>
+            <li>Netler ve öğrenme çıktısı dökümü sınav günü hazırdır.</li>
+            <li>Rehber öğretmen sınıf × kazanım haritasını görür, ödevi buna göre verir.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="roles">
+        <div class="role"><span class="bubble" aria-hidden="true">A</span><h3>Rehber öğretmen</h3><p>Sınıflarının tüm derslerdeki eksik haritası, takip listesi ve yalnızca kendisinin okuduğu görüşme notları.</p></div>
+        <div class="role"><span class="bubble" aria-hidden="true">B</span><h3>Branş öğretmeni</h3><p>Yalnızca kendi dersi ve şubeleri: işlenen konuları işaretler, ödev verir, en sık yapılan hatayı görür.</p></div>
+        <div class="role"><span class="bubble" aria-hidden="true">C</span><h3>Okul yönetimi</h3><p>Şubeler arası karşılaştırma, deneme takvimi, lisans ve personel; başka okulun verisini asla görmez.</p></div>
+        <div class="role"><span class="bubble" aria-hidden="true">D</span><h3>Öğrenci</h3><p>Günlük kısa test, ödevler ve kazanım düzeyinde ilerleme. Kimseyle kıyaslanmaz, utandırılmaz.</p></div>
+        <div class="role"><span class="bubble" aria-hidden="true">E</span><h3>Veli</h3><p>Çocuğunun haftalık özeti; uygulamada veya süreli, geri alınabilir bir bağlantıyla.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ilkeler">
+    <div class="wrap">
+      <h2 class="sec-title">Bir kamu kurumuyla çalışmanın kuralları, kodun içinde.</h2>
+      <div class="rules">
+        <div class="rule"><h3>Veli onayı olmadan hesap açılmaz</h3><p>18 yaşından küçük öğrencinin hesabı, veli aydınlatma metnini okuyup her rızayı ayrı ayrı verene kadar etkinleşmez.</p></div>
+        <div class="rule"><h3>Okullar birbirinin verisini göremez</h3><p>Ayrım veritabanı düzeyinde kurulur ve her sürümde otomatik testlerle denetlenir.</p></div>
+        <div class="rule"><h3>Sorular özgün yazılır</h3><p>Yayınevi kitaplarından veya ÖSYM/MEB kitapçıklarından soru kopyalanmaz. Her soru bir branş öğretmeninin onayı olmadan yayına çıkmaz.</p></div>
+        <div class="rule"><h3>Net kesindir, puan tahmindir</h3><p>Okul içi denemenin puanı "tahmini" diye etiketlenir; okul içi sıra Türkiye sırası gibi gösterilmez.</p></div>
+        <div class="rule"><h3>Maarif Modeli öğrenme çıktıları</h3><p>Sorular ve raporlar tymm.meb.gov.tr'de yayımlanan öğrenme çıktılarına bağlıdır; müfredat değişince geçmiş kaybolmaz.</p></div>
+        <div class="rule"><h3>Yapay zekâ ayrı rızayla</h3><p>Yapay zekâ destekli özellikler velinin ayrıca verdiği rıza olmadan çalışmaz; yapay zekâ çözümleri öyle işaretlenir.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="takvim">
+    <div class="wrap">
+      <h2 class="sec-title">Nerede olduğumuz</h2>
+      <p class="sec-lead">Platform geliştirme aşamasında. Henüz bir okulda kullanılmıyor.</p>
+      <div class="timeline">
+        <div class="step now"><small>2026–2027</small><h3>Geliştirme</h3><p>Soru bankası, öğrenme çıktısı kataloğu, okul ve sınıf yapısı, tablette deneme.</p></div>
+        <div class="step"><small>2027–2028</small><h3>Pilot okul</h3><p>8. ve 12. sınıflarla tek bir pilot okulda kullanım. Pilot için görüşmeye açığız.</p></div>
+        <div class="step"><small>Sonrası</small><h3>Yaygınlaşma</h3><p>Pilot okulun geri bildirimiyle yeni okullar ve okul dışı çalışma.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sayi-kasifi">
+    <div class="wrap">
+      <div class="app">
+        <div class="app-icon" aria-hidden="true">1+</div>
+        <div>
+          <h2 class="sec-title" style="font-size:28px">Sayı Kaşifi</h2>
+          <p class="sec-lead" style="margin-top:8px">Android için geliştirdiğimiz ilk uygulamamız. Uygulamanın gizlilik politikası <a href="/hakkinda/">bu sayfada</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="iletisim">
+    <div class="wrap contact">
+      <div>
+        <h2 class="sec-title">Pilot okul olmak ya da tanıtım için yazın.</h2>
+        <p class="sec-lead">Okul yöneticisi, rehber öğretmen veya branş öğretmeniyseniz 20 dakikalık bir tanıtım ayarlayalım.</p>
+        <p style="margin-top:24px"><a class="btn btn-primary" href="mailto:alperenkirkil@gmail.com?subject=Akademi%20Ka%C5%9Fifi%20tan%C4%B1t%C4%B1m">E-posta gönderin</a></p>
+      </div>
+      <dl>
+        <div><dt>Adres</dt><dd>Fırat Üniversitesi Teknokent Kampüsü, YGT-KAM Yazılım Ar-Ge, Elazığ</dd></div>
+        <div><dt>Telefon</dt><dd><a href="tel:+905387025288">0538 702 52 88</a></dd></div>
+        <div><dt>E-posta</dt><dd><a href="mailto:alperenkirkil@gmail.com">alperenkirkil@gmail.com</a></dd></div>
+        <div><dt>Instagram</dt><dd><a href="https://www.instagram.com/akademikasifi">@akademikasifi</a></dd></div>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Turan Dynamics · Akademi Kaşifi</span>
+    <span><a href="/hakkinda/">Sayı Kaşifi gizlilik politikası</a></span>
+  </div>
+</footer>
+
+<script>
+// Örnek veri: Maarif Modeli 8. sınıf Matematik öğrenme çıktıları; değerler doğru cevap yüzdesidir.
+const rows = [
+  ["MAT.8.1.1", "Üslü ifadeler", [72, 64, 81, 58]],
+  ["MAT.8.1.2", "Kareköklü ifadeler", [41, 33, 55, 29]],
+  ["MAT.8.2.2", "Doğrusal fonksiyonlar", [66, 48, 70, 52]],
+  ["MAT.8.3.5", "Pisagor bağıntısı", [35, 27, 44, 38]],
+  ["MAT.8.4.3", "Silindirin hacmi", [null, null, 62, null]],
+];
+const band = v => v < 25 ? 1 : v < 40 ? 2 : v < 55 ? 3 : v < 70 ? 4 : 5;
+const tbody = document.querySelector("#map tbody");
+rows.forEach(([code, name, vals], r) => {
+  const tr = document.createElement("tr");
+  const k = document.createElement("td");
+  k.className = "k";
+  k.innerHTML = `<code>${code}</code>${name}`;
+  tr.appendChild(k);
+  vals.forEach((v, c) => {
+    const td = document.createElement("td");
+    if (v === null) { td.className = "na"; td.textContent = "İşlenmedi"; }
+    else { td.className = `lvl-${band(v)} cell-in`; td.textContent = `%${v}`; td.style.animationDelay = `${(r * 4 + c) * 45}ms`; }
+    tr.appendChild(td);
+  });
+  tbody.appendChild(tr);
+});
+</script>
+</body>
+</html>
