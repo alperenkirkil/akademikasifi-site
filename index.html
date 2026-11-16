@@ -48,6 +48,8 @@ nav { display: flex; gap: 22px; flex-wrap: wrap; }
 nav a { color: var(--ink); text-decoration: none; font-weight: 500; font-size: 15px; }
 nav a:hover { color: var(--optik); }
 nav a.nav-apply { color: var(--optik); font-weight: 600; }
+.nav-login { padding: 7px 14px; border: 1.5px solid var(--ink); border-radius: 8px; color: var(--ink); font-weight: 600; font-size: 14px; text-decoration: none; white-space: nowrap; }
+.nav-login:hover { border-color: var(--optik); color: var(--optik); }
 .nav-cta { display: none; padding: 8px 14px; border-radius: 8px; background: var(--optik); color: #fff; font-weight: 600; font-size: 14px; text-decoration: none; }
 @media (max-width: 760px) { nav { display: none; } .nav-cta { display: inline-block; } }
 
@@ -176,7 +178,7 @@ footer a { color: #fff; }
       <a href="#sayi-kasifi">Sayı Kaşifi</a>
       <a href="#basvuru" class="nav-apply">Pilot başvurusu</a>
     </nav>
-    <a class="nav-cta" href="#basvuru">Başvuru</a>
+    <div style="display:flex;gap:8px;align-items:center"><a class="nav-login" href="/app/">Panele giriş</a><a class="nav-cta" href="#basvuru">Başvuru</a></div>
   </div>
 </header>
 
