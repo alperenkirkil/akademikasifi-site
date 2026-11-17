@@ -69,7 +69,7 @@
     if (!as.length) m.appendChild(el("p", "muted", "Bu dönemde ödev yok."));
     as.forEach(function (a) {
       var c = el("div", "card"), row = el("div", "row");
-      row.appendChild(el("span", null, a.title + " · " + a.subject));
+      row.appendChild(el("span", null, a.title.indexOf(a.subject) === 0 ? a.title : a.title + " · " + a.subject));
       row.appendChild(el("span", a.submitted ? "ok" : "no", a.submitted ? ("Teslim edildi" + (a.late ? " (geç)" : "")) : "Teslim edilmedi"));
       c.appendChild(row);
       if (a.submitted) c.appendChild(el("div", "muted", "Doğru " + (a.correct || 0) + " · Yanlış " + (a.wrong || 0) + " · Boş " + (a.blank || 0)));
