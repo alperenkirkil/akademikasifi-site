@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Haftalık rapor – Akademi Kaşifi</title>
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --paper:#fbf8f3; --ink:#1d2433; --muted:#5d6474; --optik:#c43d3a; --teal:#1b6e7a; --line:#e6ded3; --card:#fff;
+          --green:#2e7d32; --amber:#b26a00; --orange:#c4501f; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font:16px/1.55 Figtree, system-ui, sans-serif; }
+  header { display:flex; align-items:center; gap:10px; padding:16px 20px; border-bottom:1px solid var(--line); }
+  header b { font-family:"Bricolage Grotesque", sans-serif; font-size:18px; }
+  main { max-width:720px; margin:0 auto; padding:24px 20px 48px; }
+  h1 { font-family:"Bricolage Grotesque", sans-serif; font-size:28px; margin:0 0 4px; }
+  h2 { font-size:17px; margin:28px 0 8px; }
+  .muted { color:var(--muted); font-size:14px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; margin:8px 0; }
+  .row { display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+  .ok { color:var(--green); font-weight:600; } .no { color:var(--muted); font-weight:600; }
+  .bar { display:flex; height:10px; border-radius:6px; overflow:hidden; background:#eee; margin-top:8px; }
+  .bar span { display:block; height:100%; }
+  .legend { font-size:13px; color:var(--muted); margin-top:6px; }
+  .tag { display:inline-block; font-size:12px; padding:1px 8px; border-radius:10px; background:#f4dcd8; color:var(--optik); margin-left:6px; }
+  .note { margin-top:32px; font-size:13px; color:var(--muted); border-top:1px solid var(--line); padding-top:12px; }
+  .err { color:var(--optik); }
+</style>
+</head>
+<body>
+<header><img src="/logo-96.png" width="32" height="32" alt=""><b>Akademi Kaşifi</b></header>
+<main id="m"><p class="muted">Rapor yükleniyor…</p></main>
+<script>
+(function () {
+  "use strict";
+  var FN = "https://taxmujlbxdubcghzeehd.supabase.co/functions/v1/public-report";
+  var m = document.getElementById("m");
+  var token = (location.hash.match(/(?:^#|&)t=([0-9a-f]{48})(?:&|$)/) || [])[1];
+  // Belirteç adres çubuğundan silinir (ekran görüntüsünde ve tarayıcı geçmişinde görünmesin).
+  if (history.replaceState) { history.replaceState(null, "", location.pathname); }
+
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function fmt(d) { if (!d) return ""; var x = new Date(d.length === 10 ? d + "T12:00:00" : d);
+    return x.toLocaleDateString("tr-TR", { day: "2-digit", month: "2-digit", year: "numeric", timeZone: "Europe/Istanbul" }); }
+  function fail(msg) { m.textContent = ""; m.appendChild(el("h1", null, "Rapor açılamadı")); m.appendChild(el("p", "err", msg)); }
+
+  if (!token) { fail("Bağlantı eksik ya da hatalı."); return; }
+
+  fetch(FN, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ token: token }) })
+    .then(function (r) { return r.json().then(function (b) { return { status: r.status, body: b }; }); })
+    .then(function (res) {
+      if (res.status === 404) { fail("Bu bağlantının süresi dolmuş ya da iptal edilmiş olabilir. Yeni bir bağlantı için veliyle iletişime geçin."); return; }
+      if (res.status !== 200) { fail("Şu an rapora ulaşılamıyor. Lütfen daha sonra tekrar deneyin."); return; }
+      render(res.body);
+    })
+    .catch(function () { fail("Bağlantı kurulamadı. İnternet bağlantınızı kontrol edin."); });
+
+  function render(r) {
+    m.textContent = "";
+    m.appendChild(el("h1", null, (r.first_name || "Öğrenci") + " · Haftalık rapor"));
+    m.appendChild(el("p", "muted", fmt(r.period_start) + " – " + fmt(r.period_end) + " · Bağlantı " + fmt(r.expires_at) + " tarihine kadar geçerli"));
+
+    m.appendChild(el("h2", null, "Ödevler (son 14 gün)"));
+    var as = r.assignments || [];
+    if (!as.length) m.appendChild(el("p", "muted", "Bu dönemde ödev yok."));
+    as.forEach(function (a) {
+      var c = el("div", "card"), row = el("div", "row");
+      row.appendChild(el("span", null, a.title + " · " + a.subject));
+      row.appendChild(el("span", a.submitted ? "ok" : "no", a.submitted ? ("Teslim edildi" + (a.late ? " (geç)" : "")) : "Teslim edilmedi"));
+      c.appendChild(row);
+      if (a.submitted) c.appendChild(el("div", "muted", "Doğru " + (a.correct || 0) + " · Yanlış " + (a.wrong || 0) + " · Boş " + (a.blank || 0)));
+      else if (a.due_at) c.appendChild(el("div", "muted", "Son teslim: " + fmt(a.due_at)));
+      m.appendChild(c);
+    });
+
+    var q = r.daily_quiz || {};
+    m.appendChild(el("h2", null, "Günlük mini test (son 7 gün)"));
+    m.appendChild(el("div", "card", (q.days || 0) + " gün · " + (q.answered || 0) + " soru cevaplandı · " + (q.correct || 0) + " doğru"));
+
+    m.appendChild(el("h2", null, "Öğrenme çıktıları"));
+    var ms = r.mastery || [];
+    if (!ms.length) m.appendChild(el("p", "muted", "Henüz yeterli veri yok."));
+    ms.forEach(function (x) {
+      var total = (x.beginning || 0) + (x.developing || 0) + (x.proficient || 0) + (x.insufficient || 0) || 1;
+      var c = el("div", "card"); c.appendChild(el("b", null, x.subject));
+      var bar = el("div", "bar");
+      [["proficient", "var(--green)"], ["developing", "var(--amber)"], ["beginning", "var(--orange)"], ["insufficient", "#cfd3da"]].forEach(function (p) {
+        var s = el("span"); s.style.width = (100 * (x[p[0]] || 0) / total) + "%"; s.style.background = p[1]; bar.appendChild(s);
+      });
+      c.appendChild(bar);
+      c.appendChild(el("div", "legend", "Yeterli " + (x.proficient || 0) + " · Gelişiyor " + (x.developing || 0) + " · Başlangıç " + (x.beginning || 0) + " · Yetersiz veri " + (x.insufficient || 0)));
+      m.appendChild(c);
+    });
+
+    var fs = r.focus || [];
+    m.appendChild(el("h2", null, "Gelişime açık çıktılar"));
+    if (!fs.length) m.appendChild(el("p", "muted", "Henüz yeterli veri yok."));
+    fs.forEach(function (f) {
+      var c = el("div", "card"), t = el("b", null, f.subject + " · " + f.code);
+      if (!f.official) t.appendChild(el("span", "tag", "Taslak"));
+      c.appendChild(t); c.appendChild(el("div", "muted", f.text)); m.appendChild(c);
+    });
+
+    m.appendChild(el("p", "note", "Bu rapor puan değil, öğrenme çıktısı düzeyi gösterir. Sınıf sıralaması ve başka öğrencilere ait bilgi içermez. " +
+      "Düzey, en az 5 cevaptan sonra gösterilir; daha azı \"yetersiz veri\" sayılır."));
+  }
+})();
+</script>
+</body>
+</html>
