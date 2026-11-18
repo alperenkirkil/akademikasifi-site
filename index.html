@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Akademi Kaşifi</title>
-<meta name="description" content="Akademi Kaşifi: LGS ve YKS'ye hazırlanan okullar için deneme, ödev ve sınıf × kazanım haritası. Maarif Modeli öğrenme çıktılarıyla. Turan Dynamics, Fırat Üniversitesi Teknokent.">
+<meta name="description" content="Akademi Kaşifi: her öğrencinin hangi kazanımı anladığını, hangisinde takıldığını gösteren kazanım takip platformu. Günlük mini test, ödev ve deneme aynı kazanım profiline işlenir. Maarif Modeli öğrenme çıktılarıyla. Turan Dynamics, Fırat Üniversitesi Teknokent.">
 <meta property="og:title" content="Akademi Kaşifi">
-<meta property="og:description" content="Optik formu bırakın; sınıfınızın hangi öğrenme çıktısında takıldığını deneme günü görün.">
+<meta property="og:description" content="Not değil, anlama: her öğrencinin hangi kazanımı anladığını ve hangisinde takıldığını her gün görün.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://www.akademikasifi.com/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="/favicon.png">
@@ -70,6 +70,7 @@ nav a.nav-apply { color: var(--optik); font-weight: 600; }
 .eyebrow { font: 600 13px/1 var(--body); letter-spacing: .08em; text-transform: uppercase; color: var(--optik); margin-bottom: 18px; }
 .hero h1 { font-size: clamp(34px, 4.4vw, 54px); font-weight: 800; letter-spacing: -0.025em; }
 .hero h1 s { text-decoration-color: var(--optik); text-decoration-thickness: 4px; color: var(--muted); }
+.hero h1 em { font-style: normal; color: var(--teal); }
 .lead { font-size: 19px; color: var(--muted); max-width: 34em; margin: 22px 0 30px; }
 .origin { margin: -12px 0 28px; padding: 12px 16px; border-left: 4px solid var(--optik); background: #fff; border-radius: 0 10px 10px 0; font-size: 16px; max-width: 34em; }
 .actions { display: flex; gap: 14px; flex-wrap: wrap; }
@@ -186,9 +187,9 @@ footer a { color: #fff; }
 <main id="top">
   <div class="wrap hero">
     <div>
-      <p class="eyebrow">LGS ve YKS'ye hazırlanan okullar için</p>
-      <h1><s>Optik form</s> yerine, sınıfınızın hangi kazanımda takıldığını deneme günü görün.</h1>
-      <p class="lead">Akademi Kaşifi; tablette deneme, ödev ve günlük çalışmayı Maarif Modeli öğrenme çıktılarına bağlar. Rehber öğretmen sınıfın eksik haritasını, branş öğretmeni kendi dersini, veli haftalık özeti görür.</p>
+      <p class="eyebrow">Ortaokul ve lise için kazanım takibi</p>
+      <h1>Her öğrencinin hangi kazanımı <em>anladığını</em>, hangisinde takıldığını her gün görün.</h1>
+      <p class="lead">Akademi Kaşifi; günlük mini testi, ödevi ve denemeyi tek bir kazanım profilinde birleştirir. Öğretmen işlediği konuyu işaretler, sistem her cevabı Maarif Modeli öğrenme çıktısına bağlar. Branş öğretmeni kendi dersinde kimin neyi anlamadığını, rehber öğretmen sınıfın eksik haritasını, veli çocuğunun gerçek durumunu görür.</p>
       <p class="origin">ABD'de okulların yaygın kullandığı öğrenme çıktısı düzeyinde ölçme ve veri odaklı takip yaklaşımını, Maarif Modeli'ne göre Türk okullarına getiriyoruz.</p>
       <div class="actions">
         <a class="btn btn-primary" href="#basvuru">Pilot okul başvurusu</a>
@@ -198,7 +199,7 @@ footer a { color: #fff; }
 
     <figure class="sheet" aria-label="Örnek sınıf ve kazanım haritası">
       <div class="sheet-head">
-        <h2>8. sınıf Matematik · deneme sonrası</h2>
+        <h2>8. sınıf Matematik · kazanım durumu</h2>
         <span class="tag">Örnek veri</span>
       </div>
       <div class="map-scroll">
@@ -218,25 +219,25 @@ footer a { color: #fff; }
 
   <section id="okullar">
     <div class="wrap">
-      <h2 class="sec-title">Haftalık deneme, kâğıt ve tarayıcı olmadan.</h2>
-      <p class="sec-lead">8. ve 12. sınıflarda okulların bugünkü iş yükü haftalık denemedir. Akademi Kaşifi bu döngünün yerini alır ve sonucu sınav günü, öğrenme çıktısı düzeyinde verir.</p>
+      <h2 class="sec-title">Bir deneme netinden fazlası: öğrenmenin kendisi.</h2>
+      <p class="sec-lead">Net, öğrencinin kaç soru yaptığını söyler; hangi kazanımı anlamadığını söylemez. Akademi Kaşifi her cevabı bir öğrenme çıktısına bağlar ve öğrencinin o kazanımdaki düzeyini (Başlangıç, Gelişiyor, Yeterli) her gün günceller. Deneme bu takibin yalnızca bir parçasıdır.</p>
       <div class="compare">
         <div class="col old">
           <h3>Bugün</h3>
           <ol>
-            <li>Kitapçık ve optik form basılır, dağıtılır.</li>
-            <li>Formlar toplanır, okuyucudan geçirilir.</li>
-            <li>Sonuçlar Excel'e aktarılır; çoğu zaman yalnızca net görülür.</li>
-            <li>Hangi konuda eksik olduğu ders ders, elle çıkarılır.</li>
+            <li>Öğrencinin durumu çoğu zaman yalnızca deneme netinden okunur.</li>
+            <li>Ödev, test ve deneme sonuçları ayrı yerlerde, ayrı biçimlerde durur.</li>
+            <li>Hangi kazanımın anlaşılmadığı ders ders, elle çıkarılır; çoğu zaman hiç çıkarılmaz.</li>
+            <li>Eksik, sınav dönemi yaklaşınca fark edilir.</li>
           </ol>
         </div>
         <div class="col new">
           <h3>Akademi Kaşifi ile</h3>
           <ol>
-            <li>Deneme tablette açılır; bağlantı koparsa cevaplar cihazda saklanır.</li>
-            <li>Süreyi sunucu tutar; aynı öğrenci ikinci cihazdan giremez.</li>
-            <li>Netler ve öğrenme çıktısı dökümü sınav günü hazırdır.</li>
-            <li>Rehber öğretmen sınıf × kazanım haritasını görür, ödevi buna göre verir.</li>
+            <li>Günlük mini test, ödev ve deneme aynı kazanım profiline işlenir.</li>
+            <li>Yalnızca derste işlenmiş konular eksik sayılır; az veriyle hüküm verilmez.</li>
+            <li>Öğretmen sınıf × kazanım haritasında kimin neyi anlamadığını görür, ödevi buna göre verir.</li>
+            <li>Öğrenci "bugün ne çalışmalıyım" sorusunun cevabını kendi ekranında bulur.</li>
           </ol>
         </div>
       </div>
@@ -244,8 +245,8 @@ footer a { color: #fff; }
       <div class="roles">
         <div class="role"><span class="bubble" aria-hidden="true">A</span><h3>Rehber öğretmen</h3><p>Sınıflarının tüm derslerdeki eksik haritası, takip listesi ve yalnızca kendisinin okuduğu görüşme notları.</p></div>
         <div class="role"><span class="bubble" aria-hidden="true">B</span><h3>Branş öğretmeni</h3><p>Yalnızca kendi dersi ve şubeleri: işlenen konuları işaretler, ödev verir, en sık yapılan hatayı görür.</p></div>
-        <div class="role"><span class="bubble" aria-hidden="true">C</span><h3>Okul yönetimi</h3><p>Şubeler arası karşılaştırma, deneme takvimi, lisans ve personel; başka okulun verisini asla görmez.</p></div>
-        <div class="role"><span class="bubble" aria-hidden="true">D</span><h3>Öğrenci</h3><p>Günlük kısa test, ödevler ve kazanım düzeyinde ilerleme. Kimseyle kıyaslanmaz, utandırılmaz.</p></div>
+        <div class="role"><span class="bubble" aria-hidden="true">C</span><h3>Okul yönetimi</h3><p>Okul geneli kazanım durumu, şube × ders karşılaştırması ve ödev teslim oranları; süre ve sıralama ayarları okulun elinde. Başka okulun verisini asla görmez.</p></div>
+        <div class="role"><span class="bubble" aria-hidden="true">D</span><h3>Öğrenci</h3><p>"Bugün" kartında günlük mini test, bekleyen ödevler ve çalışması gereken kazanımlar. Kimseyle kıyaslanmaz, utandırılmaz.</p></div>
         <div class="role"><span class="bubble" aria-hidden="true">E</span><h3>Veli</h3><p>Çocuğunun kazanım düzeyindeki gerçek ilerlemesini şeffaf biçimde izler; okul denemeleriyle uyuşmayan bir tablo varsa erkenden fark eder.</p></div>
       </div>
     </div>
